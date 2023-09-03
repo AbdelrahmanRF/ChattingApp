@@ -23,6 +23,7 @@ public class UsersController : ControllerBase
 
         return Ok(users);
     }
+    
     [HttpGet("{id}")]
     public async Task<ActionResult<AppUser>> GetUser(int id)
     {
@@ -32,8 +33,5 @@ public class UsersController : ControllerBase
 
         return Ok(user);
     }
-
-
-
 
 }
