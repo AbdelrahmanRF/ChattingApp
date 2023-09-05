@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from './_services/account.service';
+import { User } from './_models/User';
 
 @Component({
   selector: 'app-root',
@@ -9,21 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'Chatting App';
 
-  users: any;
-
-  constructor(private http: HttpClient) { }
+  constructor(private accountService: AccountService) { }
   
   ngOnInit(): void {
-    this.http.get('https://localhost:5001/users')
-      .subscribe({
-        next: r => this.users = r,
-        error: this.handelError,
-        complete: () => console.log('request is completed')
-    })
+    this.setCurrentUser();
   }
-    private handelError(err: any) {
-    console.log("Response Error, Status:", err.status);
-    console.log("Response Error, Status Text:", err.statusText);
-    console.log(err);
+
+  setCurrentUser() {
+    const userString = localStorage.getItem('user');
+    if (!userString) return
+    const user: User = JSON.parse(userString)
+    this.accountService.setCurrentUser(user)
   }
 }
