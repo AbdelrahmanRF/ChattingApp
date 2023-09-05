@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 
 <ul>
-    <li *ngFor="let user of users">
-        {{user.id}} - {{user.userName}}
+    <li *ngFor="let user of users; let i = index">
+        {{i+1}} - {{user.userName}}
     </li>
 </ul>
