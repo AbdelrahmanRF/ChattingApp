@@ -41,9 +41,12 @@ public class MessageRepository : IMessageRepository
 
         query = messageParams.Container switch
         {
-            "Inbox" => query.Where(u => u.RecipientUsername == messageParams.Username),
-            "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username),
-            _ => query.Where(u => u.RecipientUsername == messageParams.Username && u.DateRead == null)
+            "Inbox" => query.Where(u => u.RecipientUsername == messageParams.Username 
+            && u.RecipientDeleted == false),
+            "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username 
+            && u.SenderDeleted == false),
+            _ => query.Where(u => u.RecipientUsername == messageParams.Username 
+            && u.RecipientDeleted == false && u.DateRead == null)
         };
 
         var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
@@ -62,7 +65,7 @@ public class MessageRepository : IMessageRepository
                 m.RecipientUsername == recipientUsername &&
                 m.SenderUsername == currentUsername && m.SenderDeleted == false
             )
-            .OrderByDescending(m => m.MessageSent)
+            .OrderBy(m => m.MessageSent)
             .ToListAsync();
 
         var unreadMessages = messages.Where(m => m.DateRead == null
