@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { of, map, take } from 'rxjs';
 import { UserParams } from '../_models/userParams';
