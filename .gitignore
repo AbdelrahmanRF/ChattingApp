@@ -479,3 +479,6 @@ API/appsettings.json
 .vscode/settings.json
 .vscode/settings.json
 s on recommendation tab and member details component. Messages section pending.
+
+# Test error file
+client/src/app/errors/test-error/

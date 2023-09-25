@@ -80,7 +80,7 @@ Before you begin, make sure you have the following software and tools installed:
 
    - Start the backend server. You can use Visual Studio, Visual Studio Code, or the .NET CLI.
 
-   The backend should now be accessible at `http://localhost:5000`.
+   The backend should now be accessible at `http://localhost:5001`.
 
 ### Configuration
 
